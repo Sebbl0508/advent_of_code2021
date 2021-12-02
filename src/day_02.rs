@@ -13,7 +13,7 @@ pub fn run() {
 
 fn part_01() {
     let bytes = ASSETS_FOLDER
-        .get_file("day02part01.input")
+        .get_file("day02.input")
         .unwrap()
         .contents();
     let string = String::from_utf8_lossy(bytes);
@@ -33,7 +33,7 @@ fn part_01() {
 
 fn part_02() {
     let bytes = ASSETS_FOLDER
-        .get_file("day02part02.input")
+        .get_file("day02.input")
         .unwrap()
         .contents();
     let string = String::from_utf8_lossy(bytes);

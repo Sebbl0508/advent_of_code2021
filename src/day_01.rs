@@ -8,7 +8,7 @@ pub fn run() {
 
 fn part_01() {
     let bytes = ASSETS_FOLDER
-        .get_file("day01part01.input")
+        .get_file("day01.input")
         .unwrap()
         .contents();
     let string = String::from_utf8_lossy(bytes).to_string();
@@ -36,7 +36,7 @@ fn part_01() {
 
 fn part_02() {
     let bytes = ASSETS_FOLDER
-        .get_file("day01part02.input")
+        .get_file("day01.input")
         .unwrap()
         .contents();
     let string = String::from_utf8_lossy(bytes);
