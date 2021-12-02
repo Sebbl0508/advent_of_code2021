@@ -1,5 +1,5 @@
-use std::collections::VecDeque;
 use crate::assets::ASSETS_FOLDER;
+use std::collections::VecDeque;
 
 pub fn run() {
     part_01();
@@ -7,7 +7,10 @@ pub fn run() {
 }
 
 fn part_01() {
-    let bytes = ASSETS_FOLDER.get_file("day01part01.input").unwrap().contents();
+    let bytes = ASSETS_FOLDER
+        .get_file("day01part01.input")
+        .unwrap()
+        .contents();
     let string = String::from_utf8_lossy(bytes).to_string();
     let mut lines = string.lines();
 
@@ -25,16 +28,26 @@ fn part_01() {
         last_value = cur_value;
     }
 
-    println!("01/01: Number of depth increases: {}", num_positive_depth_change);
+    println!(
+        "01/01: Number of depth increases: {}",
+        num_positive_depth_change
+    );
 }
 
 fn part_02() {
-    let bytes = ASSETS_FOLDER.get_file("day01part02.input").unwrap().contents();
+    let bytes = ASSETS_FOLDER
+        .get_file("day01part02.input")
+        .unwrap()
+        .contents();
     let string = String::from_utf8_lossy(bytes);
     let mut lines = string.lines();
 
     let mut num_positive_depth_change = 0;
-    let mut last_sum = lines.clone().take(3).map(|i| i.parse::<u32>().unwrap()).sum();
+    let mut last_sum = lines
+        .clone()
+        .take(3)
+        .map(|i| i.parse::<u32>().unwrap())
+        .sum();
 
     let mut values = VecDeque::new();
 
@@ -45,7 +58,6 @@ fn part_02() {
         if values.len() < 3 {
             continue;
         }
-
 
         let sum: u32 = values.iter().sum();
 
@@ -59,5 +71,8 @@ fn part_02() {
         last_sum = sum;
     }
 
-    println!("01/02: Number of depth increases: {}", num_positive_depth_change);
+    println!(
+        "01/02: Number of depth increases: {}",
+        num_positive_depth_change
+    );
 }
