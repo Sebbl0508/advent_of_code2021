@@ -2,7 +2,7 @@ use std::collections::VecDeque;
 use crate::assets::ASSETS_FOLDER;
 
 pub fn run() {
-    // part_01();
+    part_01();
     part_02();
 }
 
