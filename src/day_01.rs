@@ -7,10 +7,7 @@ pub fn run() {
 }
 
 fn part_01() {
-    let bytes = ASSETS_FOLDER
-        .get_file("day01.input")
-        .unwrap()
-        .contents();
+    let bytes = ASSETS_FOLDER.get_file("day01.input").unwrap().contents();
     let string = String::from_utf8_lossy(bytes).to_string();
     let mut lines = string.lines();
 
@@ -35,10 +32,7 @@ fn part_01() {
 }
 
 fn part_02() {
-    let bytes = ASSETS_FOLDER
-        .get_file("day01.input")
-        .unwrap()
-        .contents();
+    let bytes = ASSETS_FOLDER.get_file("day01.input").unwrap().contents();
     let string = String::from_utf8_lossy(bytes);
     let mut lines = string.lines();
 

@@ -7,15 +7,12 @@ struct Submarine {
 }
 
 pub fn run() {
-    // part_01();
+    part_01();
     part_02();
 }
 
 fn part_01() {
-    let bytes = ASSETS_FOLDER
-        .get_file("day02.input")
-        .unwrap()
-        .contents();
+    let bytes = ASSETS_FOLDER.get_file("day02.input").unwrap().contents();
     let string = String::from_utf8_lossy(bytes);
     let mut lines = string.lines();
 
@@ -32,10 +29,7 @@ fn part_01() {
 }
 
 fn part_02() {
-    let bytes = ASSETS_FOLDER
-        .get_file("day02.input")
-        .unwrap()
-        .contents();
+    let bytes = ASSETS_FOLDER.get_file("day02.input").unwrap().contents();
     let string = String::from_utf8_lossy(bytes);
     let mut lines = string.lines();
 
