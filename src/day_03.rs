@@ -10,7 +10,7 @@ fn part_01() {
     let string = String::from_utf8_lossy(bytes).to_string();
 
     let linelen = string.lines().next().unwrap().len();
-    let mut lines = string.lines();
+    let lines = string.lines();
 
     let mut gamma_rate_bitvec = Vec::new();
     let mut epsilon_rate_bitvec = Vec::new();

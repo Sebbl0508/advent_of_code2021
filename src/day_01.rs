@@ -34,7 +34,7 @@ fn part_01() {
 fn part_02() {
     let bytes = ASSETS_FOLDER.get_file("day01.input").unwrap().contents();
     let string = String::from_utf8_lossy(bytes);
-    let mut lines = string.lines();
+    let lines = string.lines();
 
     let mut num_positive_depth_change = 0;
     let mut last_sum = lines
