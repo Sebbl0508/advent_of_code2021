@@ -1,8 +1,18 @@
 use crate::assets::ASSETS_FOLDER;
 
 pub fn run() {
-    part_01();
-    // part_02();
+    // part_01();
+    part_02();
+}
+
+fn part_02() {
+    let bytes = ASSETS_FOLDER.get_file("day03.input").unwrap().contents();
+    let string = String::from_utf8_lossy(bytes);
+    let lines = string.lines();
+
+    let linelen = string.lines().next().unwrap();
+
+    // let mut nums = Vec::new();
 }
 
 fn part_01() {
@@ -49,10 +59,4 @@ fn part_01() {
 
 
     dbg!(gamma_rate_num, epsilon_rate_num, gamma_rate_num * epsilon_rate_num);
-}
-
-fn part_02() {
-    let bytes = ASSETS_FOLDER.get_file("day03.input").unwrap().contents();
-    let string = String::from_utf8_lossy(bytes);
-    let lines = string.lines();
 }
