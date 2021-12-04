@@ -169,7 +169,7 @@ impl BoardMgr {
     pub fn new(lines: &mut Lines) -> Self {
         let mut boards = Vec::new();
 
-        while let Some(line) = lines.next() {
+        while let Some(_) = lines.next() {
             // Blank lines are skipped by vodoo magic ( ͡° ͜ʖ ͡°)
             let board_lines: Vec<&str> = lines.take(5).collect();
             boards.push(Board::new(board_lines));
