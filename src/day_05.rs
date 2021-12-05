@@ -6,7 +6,7 @@ pub fn run() {
     let bytes = ASSETS_FOLDER.get_file("day05.example").unwrap().contents();
     let string = String::from_utf8_lossy(bytes).to_string();
 
-    part_01(&string);
+    // part_01(&string);
     part_02(&string);
 }
 
