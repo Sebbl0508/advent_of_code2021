@@ -1,12 +1,12 @@
 use std::collections::HashMap;
-use std::fmt::{Debug, Formatter, Pointer};
+use std::fmt::{Debug, Formatter};
 use crate::assets::ASSETS_FOLDER;
 
 pub fn run() {
     let bytes = ASSETS_FOLDER.get_file("day05.example").unwrap().contents();
     let string = String::from_utf8_lossy(bytes).to_string();
 
-    // part_01(&string);
+    part_01(&string);
     part_02(&string);
 }
 
@@ -37,14 +37,11 @@ fn find_overlapping_p01(vent_lines: &Vec<VentLine<u32>>) -> u32 {
         }
 
         if vent_line.0.y == vent_line.1.y {
-            let mut end = 0;
 
-            let start = if vent_line.0.x > vent_line.1.x {
-                end = vent_line.0.x;
-                vent_line.1.x
+            let (start, end) = if vent_line.0.x > vent_line.1.x {
+                (vent_line.1.x, vent_line.0.x)
             } else {
-                end = vent_line.1.x;
-                vent_line.0.x
+                (vent_line.0.x, vent_line.1.x)
             };
 
             for x in start..=end {
@@ -56,14 +53,10 @@ fn find_overlapping_p01(vent_lines: &Vec<VentLine<u32>>) -> u32 {
                 }
             }
         } else {
-            let mut end = 0;
-
-            let start = if vent_line.0.y > vent_line.1.y {
-                end = vent_line.0.y;
-                vent_line.1.y
+            let (start, end) = if vent_line.0.y > vent_line.1.y {
+                (vent_line.1.y, vent_line.0.y)
             } else {
-                end = vent_line.1.y;
-                vent_line.0.y
+                (vent_line.0.y, vent_line.1.y)
             };
 
 
@@ -102,7 +95,7 @@ where T: PartialEq
 
 impl VentLine<u32> {
     pub fn from_line(line: &str) -> VentLine<u32> {
-        let mut txt_splits: Vec<&str> = line.split(" -> ").collect();
+        let txt_splits: Vec<&str> = line.split(" -> ").collect();
         let begin_point: Vec<&str> = txt_splits.get(0).unwrap().split(",").collect();
         let begin_point: Vec2<u32> = Vec2::new(begin_point[0].parse().unwrap(), begin_point[1].parse().unwrap());
 
