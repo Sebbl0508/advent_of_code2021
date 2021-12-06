@@ -4,7 +4,7 @@ use std::fmt::{Debug, Formatter};
 use crate::assets::ASSETS_FOLDER;
 
 pub fn run() {
-    let bytes = ASSETS_FOLDER.get_file("day05.example").unwrap().contents();
+    let bytes = ASSETS_FOLDER.get_file("day05.input").unwrap().contents();
     let string = String::from_utf8_lossy(bytes).to_string();
 
     // part_01(&string);
@@ -94,8 +94,8 @@ fn find_overlapping_p02(vent_lines: &Vec<VentLine<i32>>) -> u32 {
             let start = min(from.y, to.y);
             let end = max(from.y, to.y);
 
-            for x in start..=end {
-                let pos = Vec2::new(x, from.y);
+            for y in start..=end {
+                let pos = Vec2::new(from.x, y);
                 if map.contains_key(&pos) {
                     map.get_mut(&pos).map(|v| *v += 1);
                 } else {
@@ -106,8 +106,8 @@ fn find_overlapping_p02(vent_lines: &Vec<VentLine<i32>>) -> u32 {
             let start = min(from.x, to.x);
             let end = max(from.x, to.x);
 
-            for y in start..=end {
-                let pos = Vec2::new(from.x, y);
+            for x in start..=end {
+                let pos = Vec2::new(x, from.y);
                 if map.contains_key(&pos) {
                     map.get_mut(&pos).map(|v| *v += 1);
                 } else {
@@ -128,9 +128,16 @@ fn find_overlapping_p02(vent_lines: &Vec<VentLine<i32>>) -> u32 {
 
             let mut pos = from.clone();
 
+            if map.contains_key(&pos) {
+                map.get_mut(&pos).map(|v| *v += 1);
+            } else {
+                map.insert(pos.clone(), 1);
+            }
+
             while pos.x != to.x && pos.y != to.y {
                 pos.x += x_delta;
                 pos.y += y_delta;
+
 
                 if map.contains_key(&pos) {
                     map.get_mut(&pos).map(|v| *v += 1);
@@ -138,14 +145,10 @@ fn find_overlapping_p02(vent_lines: &Vec<VentLine<i32>>) -> u32 {
                     map.insert(pos.clone(), 1);
                 }
             }
-            println!("{:?}\n", &vent_line);
         }
     }
     let a = map.iter().filter(|v| *v.1 > 1);
-    a.clone().for_each(|v| println!("{:?}: {}", v.0, v.1));
-
     a.count() as u32
-    //map.iter().filter(|v| *v.1 > 1).for_each(|v| println!("{:?}: {}", v.0, v.1)).count() as u32
 }
 
 
