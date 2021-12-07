@@ -2,40 +2,83 @@ use std::cmp::min;
 use crate::assets::ASSETS_FOLDER;
 
 pub fn run() {
-    let bytes = ASSETS_FOLDER.get_file("day07.example").unwrap().contents();
+    let bytes = ASSETS_FOLDER.get_file("day07.input").unwrap().contents();
     let string = String::from_utf8_lossy(bytes).to_string();
 
     part_01(&string);
-    // part_02(&string);
+    part_02(&string);
 }
 
-// Binary Search?
-// Begin at average of all values (sum / len_of_vec)
-// Get the fuel consumption
-// Get the average of both halfes again now (1/4 & 3/4)
-// Get fuel consumption of both halfes
-// Continue wherever the fuel consumption is lower than the first
 fn part_01(input: &String) {
-    let mut starting_positions: Vec<usize> = input.trim().split(",").map(|v| v.parse::<usize>().unwrap()).collect();
-    starting_positions.sort();
+    let mut crab_positions: Vec<usize> = input.trim().split(",").map(|v| v.parse::<usize>().unwrap()).collect();
+    crab_positions.sort();
 
-    let avg = starting_positions.iter().sum::<usize>() / starting_positions.len();
-    let avg = get_nearest(&starting_positions, avg);
+    let mut lowest = crab_positions.get(0).unwrap();
+    let mut lowest = get_fuel_consumption_p01(&crab_positions, *lowest);
 
-    let mut smaller: Vec<usize> = starting_positions.clone().into_iter().filter(|&v| v <= avg).collect();
-    let mut bigger: Vec<usize> = starting_positions.clone().into_iter().filter(|&v| v > avg).collect();
+    for i in crab_positions.iter().skip(1) {
+        let f_consump = get_fuel_consumption_p01(&crab_positions, *i);
 
-    println!("{:?}\navg: {}\nfuel consumption: {}", &starting_positions, avg, get_fuel_consumption(&starting_positions, avg));
-    println!("\n\n{:?}\n{:?}\n{:?}", starting_positions, smaller, bigger);
+        if f_consump < lowest {
+            lowest = f_consump;
+        }
+    }
+
+    println!("07/01: The Lowest fuel consumption of all crabs: {}", lowest);
 }
 
-
+/// This function is not recommended to run in Debug mode :/
 fn part_02(input: &String) {
-    todo!();
+    let mut crab_positions: Vec<usize> = input.trim().split(",").map(|v| v.parse::<usize>().unwrap()).collect();
+    crab_positions.sort();
+
+    let mut lowest = crab_positions.iter().fold(crab_positions[0], |acc, &v| {
+        if v < acc {
+            v
+        } else {
+            acc
+        }
+    });
+
+    let mut highest = crab_positions.iter().fold(crab_positions[0], |acc, &v| {
+        if v > acc {
+            v
+        } else {
+            acc
+        }
+    });
+
+
+    let mut lowest_fcons = get_fuel_consumption_p02(&crab_positions, lowest);
+
+
+    for v in (lowest+1)..highest {
+        let f_consump = get_fuel_consumption_p02(&crab_positions, v);
+
+        if f_consump < lowest_fcons {
+            lowest_fcons = f_consump;
+        }
+    }
+
+    println!("07/02: The Lowest fuel consumption of all crabs: {}", lowest_fcons);
 }
 
-fn get_fuel_consumption(positions: &Vec<usize>, target_pos: usize) -> usize {
+fn get_fuel_consumption_p01(positions: &Vec<usize>, target_pos: usize) -> usize {
     positions.iter().fold(0, |acc, &v| acc + (diff(v as isize, target_pos as isize)))
+}
+
+fn get_fuel_consumption_p02(positions: &Vec<usize>, target_pos: usize) -> usize {
+    positions.iter().filter(|&&v| v != target_pos).fold(0, |acc, &v| acc + accumulate(diff(v as isize, target_pos as isize)))
+}
+
+fn accumulate(val: usize) -> usize {
+    let mut a = 0;
+
+    for i in 0..=val {
+        a += i;
+    }
+
+    return a;
 }
 
 fn diff(val1: isize, val2: isize) -> usize {
