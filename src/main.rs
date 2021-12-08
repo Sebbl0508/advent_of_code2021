@@ -17,6 +17,6 @@ fn main() {
     day_05::run();
     day_06::run();
      */
-    
+
     day_07::run();
 }

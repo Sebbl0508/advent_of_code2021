@@ -1,5 +1,5 @@
-use std::cmp::min;
 use crate::assets::ASSETS_FOLDER;
+use std::cmp::min;
 
 pub fn run() {
     let bytes = ASSETS_FOLDER.get_file("day07.input").unwrap().contents();
@@ -10,7 +10,11 @@ pub fn run() {
 }
 
 fn part_01(input: &String) {
-    let mut crab_positions: Vec<usize> = input.trim().split(",").map(|v| v.parse::<usize>().unwrap()).collect();
+    let mut crab_positions: Vec<usize> = input
+        .trim()
+        .split(",")
+        .map(|v| v.parse::<usize>().unwrap())
+        .collect();
     crab_positions.sort();
 
     let mut lowest = crab_positions.get(0).unwrap();
@@ -24,35 +28,34 @@ fn part_01(input: &String) {
         }
     }
 
-    println!("07/01: The Lowest fuel consumption of all crabs: {}", lowest);
+    println!(
+        "07/01: The Lowest fuel consumption of all crabs: {}",
+        lowest
+    );
 }
 
 /// This function is not recommended to run in Debug mode :/
 fn part_02(input: &String) {
-    let mut crab_positions: Vec<usize> = input.trim().split(",").map(|v| v.parse::<usize>().unwrap()).collect();
+    let mut crab_positions: Vec<usize> = input
+        .trim()
+        .split(",")
+        .map(|v| v.parse::<usize>().unwrap())
+        .collect();
     crab_positions.sort();
 
-    let mut lowest = crab_positions.iter().fold(crab_positions[0], |acc, &v| {
-        if v < acc {
-            v
-        } else {
-            acc
-        }
-    });
+    let mut lowest =
+        crab_positions
+            .iter()
+            .fold(crab_positions[0], |acc, &v| if v < acc { v } else { acc });
 
-    let mut highest = crab_positions.iter().fold(crab_positions[0], |acc, &v| {
-        if v > acc {
-            v
-        } else {
-            acc
-        }
-    });
-
+    let mut highest =
+        crab_positions
+            .iter()
+            .fold(crab_positions[0], |acc, &v| if v > acc { v } else { acc });
 
     let mut lowest_fcons = get_fuel_consumption_p02(&crab_positions, lowest);
 
-
-    for v in (lowest+1)..highest {
+    for v in (lowest + 1)..highest {
         let f_consump = get_fuel_consumption_p02(&crab_positions, v);
 
         if f_consump < lowest_fcons {
@@ -60,15 +63,25 @@ fn part_02(input: &String) {
         }
     }
 
-    println!("07/02: The Lowest fuel consumption of all crabs: {}", lowest_fcons);
+    println!(
+        "07/02: The Lowest fuel consumption of all crabs: {}",
+        lowest_fcons
+    );
 }
 
 fn get_fuel_consumption_p01(positions: &Vec<usize>, target_pos: usize) -> usize {
-    positions.iter().fold(0, |acc, &v| acc + (diff(v as isize, target_pos as isize)))
+    positions
+        .iter()
+        .fold(0, |acc, &v| acc + (diff(v as isize, target_pos as isize)))
 }
 
 fn get_fuel_consumption_p02(positions: &Vec<usize>, target_pos: usize) -> usize {
-    positions.iter().filter(|&&v| v != target_pos).fold(0, |acc, &v| acc + accumulate(diff(v as isize, target_pos as isize)))
+    positions
+        .iter()
+        .filter(|&&v| v != target_pos)
+        .fold(0, |acc, &v| {
+            acc + accumulate(diff(v as isize, target_pos as isize))
+        })
 }
 
 fn accumulate(val: usize) -> usize {
@@ -101,5 +114,5 @@ fn get_nearest(values: &Vec<usize>, val: usize) -> usize {
         }
     }
 
-    *values.get(cur_idx+1).unwrap()
+    *values.get(cur_idx + 1).unwrap()
 }

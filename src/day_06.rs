@@ -8,19 +8,25 @@ pub fn run() {
     let bytes = ASSETS_FOLDER.get_file("day06.input").unwrap().contents();
     let string = String::from_utf8_lossy(bytes).to_string();
 
-
     part_01(&string);
     part_02(&string);
 }
 
-
 fn part_01(input: &String) {
-    println!("06/01: Number of Anglerfish after {} days: {}", 80, run_sim(input, 80));
+    println!(
+        "06/01: Number of Anglerfish after {} days: {}",
+        80,
+        run_sim(input, 80)
+    );
 }
 
 // WARNING!: Very resource hungry
 fn part_02(input: &String) {
-    println!("06/02: Number of Anglerfish after {} days: {}", 256, run_sim(input, 256));
+    println!(
+        "06/02: Number of Anglerfish after {} days: {}",
+        256,
+        run_sim(input, 256)
+    );
 }
 
 // Stolen from github for performance reasons :(
