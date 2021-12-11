@@ -1,6 +1,6 @@
 use crate::assets::ASSETS_FOLDER;
-use std::collections::{HashMap, HashSet};
 use itertools::Itertools;
+use std::collections::{HashMap, HashSet};
 
 const UNIQ_DIGIT_ONE_LEN: usize = 2;
 const UNIQ_DIGIT_FOUR_LEN: usize = 4;
@@ -18,8 +18,6 @@ pub fn run() {
     // part_01(&string);
     part_02(&string);
 }
-
-
 
 fn part_01(input: &String) {
     let mut lines = input.lines();
@@ -48,7 +46,6 @@ fn part_02(input: &String) {
     for line in lines {
         let (inputs, outputs) = parse_input(line);
         let input_map = build_digit_map(inputs);
-
 
         let mut counter = 0;
         for to_find in outputs {
@@ -114,10 +111,8 @@ fn build_digit_map(inputs: Vec<&str>) -> [String; 10] {
 
     let sorted_digit_map = digits_map.map(|v| v.chars().sorted().collect::<String>());
 
-
     sorted_digit_map
 }
-
 
 fn parse_input(line: &str) -> (Vec<&str>, Vec<&str>) {
     let parsed_line: Vec<&str> = line.split("|").collect();
@@ -138,7 +133,6 @@ fn build_possible_connections() -> Vec<Connection> {
 
     possible_combinations
 }
-
 
 mod dumb_fns {
     type DigitMap<'a, 'b> = &'a [&'b str];
