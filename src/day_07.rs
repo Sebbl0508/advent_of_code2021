@@ -43,15 +43,13 @@ fn part_02(input: &String) {
         .collect();
     crab_positions.sort();
 
-    let mut lowest =
-        crab_positions
-            .iter()
-            .fold(crab_positions[0], |acc, &v| if v < acc { v } else { acc });
+    let mut lowest = crab_positions
+        .iter()
+        .fold(crab_positions[0], |acc, &v| if v < acc { v } else { acc });
 
-    let mut highest =
-        crab_positions
-            .iter()
-            .fold(crab_positions[0], |acc, &v| if v > acc { v } else { acc });
+    let mut highest = crab_positions
+        .iter()
+        .fold(crab_positions[0], |acc, &v| if v > acc { v } else { acc });
 
     let mut lowest_fcons = get_fuel_consumption_p02(&crab_positions, lowest);
 
