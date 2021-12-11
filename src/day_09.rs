@@ -2,7 +2,7 @@ use crate::assets::ASSETS_FOLDER;
 
 pub fn run() {
     let bytes = ASSETS_FOLDER.get_file("day09.example").unwrap().contents();
-    let string = String::from_utf8(bytes).unwrap();
+    let string = String::from_utf8(bytes.to_vec()).unwrap();
 
     part_01(&string);
     part_02(&string);
