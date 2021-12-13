@@ -58,7 +58,6 @@ fn part_02(input: &String) {
     }
 }
 
-
 impl OctoMap {
     /// Returns map[y][x]
     pub fn from_input(input: &String) -> Self {
@@ -138,7 +137,6 @@ impl OctoMap {
         }
     }
 
-
     pub fn get_adjacent_coords(&self, x: usize, y: usize) -> Vec<(usize, usize)> {
         let mut adjacents = Vec::new();
 
@@ -155,7 +153,6 @@ impl OctoMap {
         }
         return adjacents;
     }
-
 
     pub fn print(&self) {
         for (y, yline) in self.inner.iter().enumerate() {
@@ -174,9 +171,7 @@ impl OctoMap {
 
 impl Octopus {
     pub fn new(energy: usize) -> Self {
-        Self {
-            energy,
-        }
+        Self { energy }
     }
 
     fn flashing(&self) -> bool {
