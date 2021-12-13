@@ -1,4 +1,5 @@
 use crate::assets::ASSETS_FOLDER;
+use colored::Colorize;
 
 enum Direction {
     N,
@@ -96,7 +97,11 @@ impl OctoMap {
     pub fn print(&self) {
         for y in self.inner.iter() {
             for x in y {
-                print!("{}", x.energy);
+                if x.flashing {
+                    print!("{}", format!("{}", x.energy).red());
+                } else {
+                    print!("{}", x.energy);
+                }
             }
             println!();
         }
