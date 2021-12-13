@@ -1,5 +1,4 @@
 use crate::assets::ASSETS_FOLDER;
-use std::cmp::min;
 
 pub fn run() {
     let bytes = ASSETS_FOLDER.get_file("day07.input").unwrap().contents();

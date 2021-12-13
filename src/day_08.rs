@@ -1,6 +1,5 @@
 use crate::assets::ASSETS_FOLDER;
 use itertools::Itertools;
-use std::collections::{HashMap, HashSet};
 
 const UNIQ_DIGIT_ONE_LEN: usize = 2;
 const UNIQ_DIGIT_FOUR_LEN: usize = 4;
