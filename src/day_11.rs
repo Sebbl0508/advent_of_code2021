@@ -50,11 +50,14 @@ fn part_01(input: &String) {
 fn part_02(input: &String) {
     let mut map = OctoMap::from_input(input);
 
-    for i in 1..=1_000 {
+    let mut counter: u64 = 1;
+    loop {
         if map.step() == 100 {
-            println!("11/02: All Octopi flash at step {}", i);
+            println!("11/02: All Octopi flash at step {}", counter);
             break;
         }
+
+        counter += 1;
     }
 }
 
