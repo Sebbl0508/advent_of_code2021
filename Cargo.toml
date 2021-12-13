@@ -5,9 +5,9 @@ edition = "2021"
 
 
 [dependencies]
-include_dir = "^0.7.1"
-itertools = "^0.10.3"
-colored = "^2.0.0"
+include_dir = "^0.7.1" # Used for the puzzle inputs
+itertools = "^0.10.3"  # Used in some puzzles (for example '.sorted()' etc.)
+colored = "^2.0.0"     # Used for better output for '''debugging'''
 
 [profile.release]
 lto = true
